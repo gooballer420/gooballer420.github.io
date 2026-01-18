@@ -20,7 +20,7 @@
     <p id="date"></p>
     <h1 id="fuck">fuck<br>you</h1>
     <p>Jk<br>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"target="_blank">CLICK ME</a><br><br>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">CLICK ME</a><br><br>
         <button type="button" onclick="dump()">dont click me</button>
     </p>
     <img src="k.png" width=100 hight=100 alt="KKK" usemap="#no"><br>
