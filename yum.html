@@ -1,8 +1,17 @@
 <html>
 <head>
 <title>draw</title>
+<style>
+    #can{
+	border:5px dashed rgb(255, 255, 0);
+	}
+</style>
 <script>
+    function goo(event){
+        alert("fffffffff");
+    }
     let o=document.getElementById("can").getContext("2d");
+    document.getElementById("can").addEventListener("click",goo(event));
 </script>
 </head>
 <body>
