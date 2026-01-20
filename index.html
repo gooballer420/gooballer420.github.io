@@ -24,7 +24,6 @@
         <button type="button" onclick="dump()">dont click me</button>
     </p>
     <img src="k.png" width=100 hight=100 alt="KKK" usemap="#no"><br>
-	<canvas id="can" width="1000" height="1000"></canvas>
 </body>
 <map name="no">
     <area shape="default" href="yum.html" target="_blank">
@@ -34,16 +33,10 @@
 	document.getElementById("date").innerHTML = d;
 	(function(){window.alert("why!!!!!!!!!!!!!");})();
     let toggle=true;
-	let o=document.getElementById("can").getContext("2d");
     function dump(){
         (toggle==true)?document.getElementById("fuck").innerHTML="I LOVE<br>YOU": document.getElementById("fuck").innerHTML="fuck<br>you";
         toggle=!toggle;
         window.alert("oioioiiooi");
     };
-	document.getElementById("can").addEventListener("pointerover",function (event){
-		window.alert("STOPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP IAM STILL WORKIING ONN IT");
-		o.beginPath();
-		o.moveTo(event.clientX,event.clientY);
-	})
 </script>
 </html>
