@@ -1,0 +1,40 @@
+#circle{
+    cx:100;
+    cy:100;
+    fill-opacity:0;
+    r:20;
+    stroke:rgb(0, 255, 0);
+    stroke-width:1;
+}
+svg{
+	position:absolute;
+    top:0;
+    left:0;
+	width:10000;
+	height:10000;
+	z-index:-1;
+}
+canvas{
+	position:absolute;
+    top:0;
+    left:0;
+	z-index:-2;
+}
+button{
+    background-color: blue;
+    color: white;
+    font-size: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+h1{
+	color:red;
+}
+#fuck{
+	margin-bottom:100;
+}
+#main{
+    text-align:center;
+}
