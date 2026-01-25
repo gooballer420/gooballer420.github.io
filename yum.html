@@ -1,18 +1,17 @@
 <html>
 <head>
 <title>draw</title>
-<script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
 <script>
-$(document).ready(function(){
-	$(document).on({
-    mousemove:function(){
-        $("#circle").css("cx",event.pageX)
-        $("#circle").css("cy",event.pageY)
-    },
-    mousedown:function(){
-		alert(event.pageX+" "+event.pageY)
-    }
-    })
+document.addEventListener("pointermove",function(event){
+    document.getElementById("circle").style.cy=event.pageY;
+    document.getElementById("circle").style.cx=event.pageX;
+});
+document.addEventListener("mousedown",function(event){
+    const ctx = document.getElementById("canva").getContext("2d");
+    ctx.beginPath();
+    ctx.arc(event.pageX,event.pageY,20,0,2*Math.PI);
+    ctx.fillStyle = "blue";
+    ctx.fill();
 });
 </script>
 <style>
@@ -31,6 +30,11 @@ $(document).ready(function(){
 		width:10000;
 		height:10000;
 	}
+    canvas{
+		position:absolute;
+        top:0;
+        left:0;
+	}
 </style>
 </head>
 <body>
@@ -38,6 +42,7 @@ $(document).ready(function(){
 <svg>
     <circle id="circle"></circle>
 </svg>
+<canvas id="canva" width="10000" height="10000"></canvas>
 </body>
 </html>
 
