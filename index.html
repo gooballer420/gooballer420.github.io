@@ -1,8 +1,8 @@
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ummm</title>
-<link rel="stylesheet" href="css.css">
+    <meta charset="UTF-8">
+    <title>ummm</title>
+    <link rel="stylesheet" href="css.css">
 </head>
 <body id="main">
     <p id="date"></p>
@@ -18,8 +18,11 @@
     <area shape="default" href="yum.html" target="_blank">
 </map>
 <script>
+    setInterval(refresh,100);
+    function refresh(){
     const d = new Date();
 	document.getElementById("date").innerHTML = d;
+    }
 	(function(){window.alert("why!!!!!!!!!!!!!");})();
     let toggle=true;
     function dump(){
