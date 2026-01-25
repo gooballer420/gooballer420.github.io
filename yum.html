@@ -1,47 +1,21 @@
 <html>
 <head>
 <title>draw</title>
-<style>
-    body{
-        overflow:hidden;
-    }
-    #circle{
-        cx:100;
-        cy:100;
-        fill-opacity:0;
-        r:20;
-        stroke:black;
-        stroke-width:1;
-    }
-	svg{
-		position:absolute;
-        top:0;
-        left:0;
-		width:10000;
-		height:10000;
-		z-index:-1;
-	}
-    canvas{
-		position:absolute;
-        top:0;
-        left:0;
-		z-index:-2;
-	}
-</style>
+<link rel="stylesheet" href="css.css">
 </head>
-<body>
+<body style="cursor:none;overflow:hidden;">
 <svg>
     <circle id="circle"></circle>
 </svg>
 <canvas id="canva" width="10000" height="10000"></canvas>
-<button onclick="ctx.fillStyle='blue'">draw</button>
+<button onclick="ctx.fillStyle='black'">draw</button>
 <button onclick="ctx.fillStyle='white'">erase</button>
 </body>
 <script>
 let rad=20;
 let toggle=false;
 const ctx = document.getElementById("canva").getContext("2d");
-ctx.fillStyle="blue";
+ctx.fillStyle="black";
 document.addEventListener("wheel",function(event){
     rad+=event.deltaY/100;
     document.getElementById("circle").style.r=rad;
