@@ -1,24 +1,14 @@
 <html>
 <head>
 <title>draw</title>
-<script>
-document.addEventListener("pointermove",function(event){
-    document.getElementById("circle").style.cy=event.pageY;
-    document.getElementById("circle").style.cx=event.pageX;
-});
-document.addEventListener("mousedown",function(event){
-    const ctx = document.getElementById("canva").getContext("2d");
-    ctx.beginPath();
-    ctx.arc(event.pageX,event.pageY,20,0,2*Math.PI);
-    ctx.fillStyle = "blue";
-    ctx.fill();
-});
-</script>
 <style>
+    body{
+        overflow:hidden;
+    }
     #circle{
         cx:100;
         cy:100;
-		fill:white;
+        fill-opacity:0;
         r:20;
         stroke:black;
         stroke-width:1;
@@ -29,20 +19,44 @@ document.addEventListener("mousedown",function(event){
         left:0;
 		width:10000;
 		height:10000;
+		z-index:-1;
 	}
     canvas{
 		position:absolute;
         top:0;
         left:0;
+		z-index:-2;
 	}
 </style>
 </head>
 <body>
-	<p>gfgfg</p>
 <svg>
     <circle id="circle"></circle>
 </svg>
 <canvas id="canva" width="10000" height="10000"></canvas>
+<button onclick="ctx.fillStyle='blue'">draw</button>
+<button onclick="ctx.fillStyle='white'">erase</button>
 </body>
+<script>
+let rad=20;
+let toggle=false;
+const ctx = document.getElementById("canva").getContext("2d");
+ctx.fillStyle="blue";
+document.addEventListener("wheel",function(event){
+    rad+=event.deltaY/100;
+    document.getElementById("circle").style.r=rad;
+})
+document.addEventListener("pointermove",function(event){
+	if (toggle==true){
+    	ctx.beginPath();
+    	ctx.arc(event.pageX,event.pageY,rad,0,2*Math.PI);
+    	ctx.fill();
+	}
+    document.getElementById("circle").style.cy=event.pageY;
+    document.getElementById("circle").style.cx=event.pageX;
+});
+document.addEventListener("pointerdown",function(){toggle=true;});
+document.addEventListener("pointerup",function(){toggle=false;});
+</script>
 </html>
 
