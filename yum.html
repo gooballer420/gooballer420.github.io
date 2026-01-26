@@ -5,9 +5,9 @@
 </head>
 <body id="yum">
     <svg>
-        <circle id="circle"></circle>
+        <rect id="rect"></circle>
     </svg>
-    <canvas id="canva" width="10000" height="10000"></canvas>
+    <canvas width="10000" height="10000"></canvas>
     <div>
         <label for="yaya">color</label>
         <input id="colo" type="color" name="yaya">
@@ -17,29 +17,23 @@
 <script>
 let rad=20;
 let toggle=false;
-const ctx = document.getElementById("canva").getContext("2d");
-document.getElementById("clear").addEventListener("click",function(){
-	ctx.rect(0,0,10000,10000);
-	ctx.fill();
-})
-document.getElementById("colo").addEventListener("input",function(event){
-	ctx.fillStyle=event.target.value;
-})
-document.addEventListener("wheel",function(event){
+const ctx = document.querySelector("canvas").getContext("2d");
+document.getElementById("clear").addEventListener("click",event=>{ctx.fillRect(0,0,10000,10000);});
+document.getElementById("colo").addEventListener("input",event=>{ctx.fillStyle=event.target.value;});
+document.addEventListener("wheel",event=>{
     rad+=event.deltaY/100;
-    document.getElementById("circle").style.r=rad;
-})
-document.addEventListener("pointermove",function(event){
-	if (toggle==true){
-    	ctx.beginPath();
-    	ctx.arc(event.pageX,event.pageY,rad,0,2*Math.PI);
-    	ctx.fill();
-	}
-    document.getElementById("circle").style.cy=event.pageY;
-    document.getElementById("circle").style.cx=event.pageX;
+    document.getElementById("rect").style.width=rad;
+    document.getElementById("rect").style.height=rad;
 });
-document.addEventListener("pointerdown",function(){toggle=true;});
-document.addEventListener("pointerup",function(){toggle=false;});
+document.addEventListener("pointermove",event=>{
+    document.getElementById("rect").style.y=event.pageY;
+    document.getElementById("rect").style.x=event.pageX;
+	if (toggle==true){
+        requestAnimationFrame(ctx.fillRect(event.pageX,event.pageY,rad,rad));
+	}
+});
+document.addEventListener("pointerdown",()=>{toggle=true;});
+document.addEventListener("pointerup",()=>{toggle=false;});
 </script>
 </html>
 
