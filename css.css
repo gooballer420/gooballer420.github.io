@@ -29,6 +29,9 @@ div{
     border-radius:5px;
     cursor:default;
 }
+input{
+	cursor:pointer;
+}
 h1{
 	color:red;
 }
@@ -51,9 +54,7 @@ h1{
     cursor:none;
     overflow:hidden;
 }
-#colo{
-	cursor:pointer;
-}
+
 
 
 
