@@ -8,14 +8,23 @@
         <circle id="circle"></circle>
     </svg>
     <canvas id="canva" width="10000" height="10000"></canvas>
-    <button onclick="ctx.fillStyle='black'">draw</button>
-    <button onclick="ctx.fillStyle='white'">erase</button>
+    <div>
+        <label for="yaya">color</label>
+        <input id="colo" type="color" name="yaya">
+    </div><br>
+    <button id="clear">clear with color</button>
 </body>
 <script>
 let rad=20;
 let toggle=false;
 const ctx = document.getElementById("canva").getContext("2d");
-ctx.fillStyle="black";
+document.getElementById("clear").addEventListener("click",function(){
+	ctx.rect(0,0,10000,10000);
+	ctx.fill();
+})
+document.getElementById("colo").addEventListener("input",function(event){
+	ctx.fillStyle=event.target.value;
+})
 document.addEventListener("wheel",function(event){
     rad+=event.deltaY/100;
     document.getElementById("circle").style.r=rad;
