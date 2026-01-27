@@ -1,5 +1,8 @@
 let rate=500;
-let timer=0;
+let toggle=false;
+let score=0;
+const ch=document.querySelector("canvas").height;
+const cw=document.querySelector("canvas").width;
 const ctx=document.querySelector("canvas").getContext("2d");
 class Obj{
     constructor(posX,posY,sizeX,sizeY,velocityX,velocityY,objColor){
@@ -13,14 +16,14 @@ class Obj{
     }
     draw(physics){
         if (physics){
-            if (this.y+this.h>document.querySelector("canvas").height){
+            if (this.y+this.h>ch){
                 this.vY=0;
-			    this.y=document.querySelector("canvas").height-this.h;
+			    this.y=ch-this.h;
             }
             if(this.y<0){this.vY=0;this.y=0;}
-            if (this.x+this.w>document.querySelector("canvas").width){
+            if (this.x+this.w>cw){
                 this.vX=0;
-		    	this.x=document.querySelector("canvas").width-this.w;
+		    	this.x=cw-this.w;
             }
             if(this.x<0){this.vX=0;this.x=0;}
             
@@ -37,7 +40,8 @@ class Obj{
         }else{return false;}
     }
 }
-const player=new Obj(300,35,30,30,0,0,"black");
+const player=new Obj(cw/2,35,30,30,0,0,"black");
+const coin=new Obj(cw*Math.random(),ch*Math.random(),30,30,0,0,"rgb(0,255,0)");
 document.getElementById("colo").addEventListener("input",(event)=>{
     player.color=event.target.value;
 })
@@ -53,54 +57,60 @@ function w(){if(ww){player.vY-=1;}}
 function s(){if(ss){player.vY+=1;}}
 document.addEventListener("keydown",(event)=>{
     if (event.repeat==false){
-        if (event.key=="d"){dd=true;}
-        if (event.key=="a"){aa=true;}
-        if (event.key=="w"){ww=true;}
-        if (event.key=="s"){ss=true;}
+        if(event.key=="d"){dd=true;}
+        if(event.key=="a"){aa=true;}
+        if(event.key=="w"){ww=true;}
+        if(event.key=="s"){ss=true;}
+        if(event.key==" "){toggle=!toggle;}
     }
 })
 document.addEventListener("keyup",(event)=>{
-    if (event.key=="d"){dd=false;}
-    if (event.key=="a"){aa=false;}
-    if (event.key=="w"){ww=false;}
-    if (event.key=="s"){ss=false;}
+    if(event.key=="d"){dd=false;}
+    if(event.key=="a"){aa=false;}
+    if(event.key=="w"){ww=false;}
+    if(event.key=="s"){ss=false;}
 })
 let alive=true;
 function drawFrame(){
-    time();
+    if(alive&&toggle){
     d();a();w();s();
-    ctx.clearRect(0,0,document.querySelector("canvas").width,document.querySelector("canvas").height);
-    if(alive==true){player.draw(true);}
+    ctx.clearRect(0,0,cw,ch);
+    player.draw(true);
     for(const i of enemys){
         if(Obj.coll(i,player)){alive=false;}
         i.draw(false);
+    }
+    coin.draw(false);
+    if(Obj.coll(coin,player)){
+        score+=1;
+        document.getElementById("score").innerHTML="score:"+score;
+        coin.x=cw*Math.random();
+        coin.y=ch*Math.random();
+    }
     }
     requestAnimationFrame(drawFrame);
 }
 let idd=setInterval(spawn,rate);
 let enemys=[];
 function spawn(){
+    if(toggle){
     let enemy;
     let direc=Math.floor(4*Math.random());
     switch(direc){
         case 0:
-            enemy=new Obj(600*Math.random(),-40,40,40,0,5,"red");
+            enemy=new Obj(cw*Math.random(),-40,40,40,0,5,"red");
             break;
         case 1:
-            enemy=new Obj(600,300*Math.random(),40,40,-5,0,"red");
+            enemy=new Obj(cw,ch*Math.random(),40,40,-5,0,"red");
             break;
         case 2:
-            enemy=new Obj(600*Math.random(),300,40,40,0,-5,"red");
+            enemy=new Obj(cw*Math.random(),ch,40,40,0,-5,"red");
             break;
         case 3:
-            enemy=new Obj(-40,300*Math.random(),40,40,5,0,"red");
+            enemy=new Obj(-40,ch*Math.random(),40,40,5,0,"red");
             break;
     }
     enemys.push(enemy);
-}
-function time(){
-    timer+=1/60;
-    document.getElementById("timer").innerHTML="time:"+Math.round(timer);
+    }
 }
 drawFrame();
-t();
