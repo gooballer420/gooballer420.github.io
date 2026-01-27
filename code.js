@@ -61,7 +61,7 @@ document.addEventListener("keydown",(event)=>{
         if(event.key=="a"){aa=true;}
         if(event.key=="w"){ww=true;}
         if(event.key=="s"){ss=true;}
-        if(event.key==" "){toggle=!toggle;}
+        if(event.key=="p"){toggle=!toggle;}
     }
 })
 document.addEventListener("keyup",(event)=>{
