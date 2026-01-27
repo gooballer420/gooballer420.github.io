@@ -5,74 +5,11 @@
 </head>
 <body id="game">
     <h1>game</h1>
-    <canvas width="600" height="300"></canvas><br>
-    <input type="color" id="colo">
+    <canvas width="600" height="300"></canvas><br><hr>
+    <input type="color" id="colo"><br>
+    <h1 id="timer">time:0</h1><br>
+    <label for="rate">spawn rate</label>
+    <input type="number" id="rate" value="500">
 </body>
-<script>
-const ctx=document.querySelector("canvas").getContext("2d");
-class Obj{
-    constructor(posX,posY,sizeX,sizeY,velocityX,velocityY,objcolor){
-        this.color=objcolor;
-        this.x=posX;
-        this.y=posY;
-        this.w=sizeX;
-        this.h=sizeY;
-        this.vX=velocityX;
-        this.vY=velocityY;
-    }
-    draw(){
-        if (this.y+this.h>document.querySelector("canvas").height){
-            this.vY=0;
-			this.y=document.querySelector("canvas").height-this.h;
-        }
-        if(this.y<0){this.vY=0;this.y=0;}
-        if (this.x+this.w>document.querySelector("canvas").width){
-            this.vX=0;
-			this.x=document.querySelector("canvas").width-this.w;
-        }
-        if(this.x<0){this.vX=0;this.x=0;}
-        this.x+=this.vX;
-        this.y+=this.vY;
-        this.vY+=0.3;
-        ctx.fillStyle=this.color;
-        ctx.fillRect(this.x,this.y,this.w,this.h);
-    }
-}
-const player=new Obj(300,35,30,30,0,0,"black");
-document.getElementById("colo").addEventListener("input",(event)=>{
-    player.color=event.target.value;
-})
-setInterval(d,100);
-setInterval(a,100);
-setInterval(w,50);
-setInterval(s,50);
-let dd=false;
-let aa=false;
-let ww=false;
-let ss=false;
-function d(){if(dd){player.vX+=2;}}
-function a(){if(aa){player.vX-=2;}}
-function w(){if(ww){player.vY-=2;}}
-function s(){if(ss){player.vY+=2;}}
-document.addEventListener("keydown",(event)=>{
-    if (event.repeat==false){
-        if (event.key=="d"){dd=true;}
-        if (event.key=="a"){aa=true;}
-        if (event.key=="w"){ww=true;}
-        if (event.key=="s"){ss=true;}
-    }
-})
-document.addEventListener("keyup",(event)=>{
-        if (event.key=="d"){dd=false;}
-        if (event.key=="a"){aa=false;}
-        if (event.key=="w"){ww=false;}
-        if (event.key=="s"){ss=false;}
-})
-function drawFrame(){
-    ctx.clearRect(0,0,document.querySelector("canvas").width,document.querySelector("canvas").height);
-    player.draw();
-    requestAnimationFrame(drawFrame);
-}
-drawFrame();
-</script>
+<script src="code.js"></script>
 </html>
