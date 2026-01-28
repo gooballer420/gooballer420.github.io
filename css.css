@@ -35,6 +35,9 @@ input{
 h1{
 	color:red;
 }
+body{
+    overflow:hidden;
+}
 #rect{
     x:100;
     y:100;
@@ -52,7 +55,6 @@ h1{
 }
 #yum{
     cursor:none;
-    overflow:hidden;
 }
 #game{
     position:relative;

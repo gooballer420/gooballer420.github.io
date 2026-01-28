@@ -55,21 +55,35 @@ function d(){if(dd){player.vX+=1;}}
 function a(){if(aa){player.vX-=1;}}
 function w(){if(ww){player.vY-=1;}}
 function s(){if(ss){player.vY+=1;}}
+function menu(){
+    if(alive){
+        ctx.fillText("PAUSED",cw/2,ch/5);
+        toggle=!toggle;
+    }else{
+        enemys=[];
+        player.x=cw/2;player.y=35;player.vX=0;player.vY=0;
+        document.getElementById("score").innerHTML="score:"+score;
+        coin.x=cw*Math.random();coin.y=ch*Math.random();
+        alive=true;
+    }
+    drawFrame();
+}
 document.addEventListener("keydown",(event)=>{
     if (event.repeat==false){
         if(event.key=="d"){dd=true;}
         if(event.key=="a"){aa=true;}
         if(event.key=="w"){ww=true;}
         if(event.key=="s"){ss=true;}
-        if(event.key=="p"){toggle=!toggle;}
+        if(event.key==" "){menu();}
     }
-})
+});
+document.querySelector("canvas").addEventListener("click",()=>{menu();});
 document.addEventListener("keyup",(event)=>{
     if(event.key=="d"){dd=false;}
     if(event.key=="a"){aa=false;}
     if(event.key=="w"){ww=false;}
     if(event.key=="s"){ss=false;}
-})
+});
 let alive=true;
 function drawFrame(){
     if(alive&&toggle){
@@ -77,8 +91,13 @@ function drawFrame(){
     ctx.clearRect(0,0,cw,ch);
     player.draw(true);
     for(const i of enemys){
-        if(Obj.coll(i,player)){alive=false;}
-        i.draw(false);
+        if(Obj.coll(i,player)){
+            alive=false;toggle=true;score=0;
+            ctx.fillStyle="rgb(0,0,255)";
+            ctx.clearRect(0,0,cw,ch);
+            ctx.fillText("press space or click",cw/2,ch/2);
+            ctx.fillText("the window to start/reset/pause the game",cw/2,ch/2+40);
+        }else{i.draw(false);}
     }
     coin.draw(false);
     if(Obj.coll(coin,player)){
@@ -87,8 +106,8 @@ function drawFrame(){
         coin.x=cw*Math.random();
         coin.y=ch*Math.random();
     }
-    }
     requestAnimationFrame(drawFrame);
+    }
 }
 let idd=setInterval(spawn,rate);
 let enemys=[];
@@ -113,4 +132,8 @@ function spawn(){
     enemys.push(enemy);
     }
 }
+ctx.font="30px sans-serif"
+ctx.textAlign="center"
+ctx.fillText("press space or click",cw/2,ch/2);
+ctx.fillText("the window to start/reset/pause the game",cw/2,ch/2+40);
 drawFrame();
