@@ -41,7 +41,7 @@ class Obj{
     }
 }
 const player=new Obj(cw/2,35,30,30,0,0,"black");
-const coin=new Obj(cw*Math.random(),ch*Math.random(),30,30,0,0,"rgb(0,255,0)");
+const coin=new Obj((cw*Math.random())-15,(ch*Math.random())-15,30,30,0,0,"rgb(0,255,0)");
 document.getElementById("colo").addEventListener("input",(event)=>{
     player.color=event.target.value;
 })
@@ -63,7 +63,7 @@ function menu(){
         enemys=[];
         player.x=cw/2;player.y=35;player.vX=0;player.vY=0;
         document.getElementById("score").innerHTML="score:"+score;
-        coin.x=cw*Math.random();coin.y=ch*Math.random();
+        coin.x=(cw*Math.random())-15;(coin.y=ch*Math.random())-15;
         alive=true;
     }
     drawFrame();
@@ -103,8 +103,8 @@ function drawFrame(){
     if(Obj.coll(coin,player)){
         score+=1;
         document.getElementById("score").innerHTML="score:"+score;
-        coin.x=cw*Math.random();
-        coin.y=ch*Math.random();
+        coin.x=(cw*Math.random())-15;
+        coin.y=(ch*Math.random())-15;
     }
     requestAnimationFrame(drawFrame);
     }
