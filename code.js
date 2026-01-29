@@ -48,7 +48,7 @@ class Obj{
 const player=new Obj(cw/2,35,30,30,"rgb(0,0,0)");
 const coin=new Obj((cw*Math.random())-15,(ch*Math.random())-15,30,30,"rgb(0,255,0)");
 document.getElementById("colo").addEventListener("input",(event)=>{
-    player.color=event.target.value;
+    player.tex=event.target.value;
 })
 document.getElementById("rate").addEventListener("input",(event)=>{
     clearInterval(idd);
