@@ -32,7 +32,7 @@ class Obj{
         this.x+=this.vX;
         this.y+=this.vY;
         if(physics){this.vY+=0.3;}
-        if((this.tex.charAt(0)=='r')&&(this.tex.charAt(1)=='g')&&(this.tex.charAt(2)=='b')){
+        if(this.tex.charAt(0)=='#'){
             ctx.fillStyle=this.tex;
             ctx.fillRect(this.x,this.y,this.w,this.h);
         }else{
@@ -45,8 +45,8 @@ class Obj{
         }else{return false;}
     }
 }
-const player=new Obj(cw/2,35,30,30,"rgb(0,0,0)");
-const coin=new Obj((cw*Math.random())-15,(ch*Math.random())-15,30,30,"rgb(0,255,0)");
+const player=new Obj(cw/2,35,30,30,"#0000ff");
+const coin=new Obj((cw*Math.random())-15,(ch*Math.random())-15,30,30,"#00ff00");
 document.getElementById("colo").addEventListener("input",(event)=>{
     player.tex=event.target.value;
 })
@@ -122,16 +122,16 @@ function spawn(){
     let direc=Math.floor(4*Math.random());
     switch(direc){
         case 0:
-            enemy=new Obj(cw*Math.random(),-40,40,40,"rgb(255,0,0)",0,5);
+            enemy=new Obj(cw*Math.random(),-40,40,40,"#ff0000",0,5);
             break;
         case 1:
-            enemy=new Obj(cw,ch*Math.random(),40,40,"rgb(255,0,0)",-5,0);
+            enemy=new Obj(cw,ch*Math.random(),40,40,"#ff0000",-5,0);
             break;
         case 2:
-            enemy=new Obj(cw*Math.random(),ch,40,40,"rgb(255,0,0)",0,-5);
+            enemy=new Obj(cw*Math.random(),ch,40,40,"#ff0000",0,-5);
             break;
         case 3:
-            enemy=new Obj(-40,ch*Math.random(),40,40,"rgb(255,0,0)",5,0);
+            enemy=new Obj(-40,ch*Math.random(),40,40,"#ff0000",5,0);
             break;
     }
     enemys.push(enemy);
