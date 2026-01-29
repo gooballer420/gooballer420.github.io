@@ -1,12 +1,13 @@
 let rate=500;
 let toggle=false;
 let score=0;
+let img=new Image();
 const ch=document.querySelector("canvas").height;
 const cw=document.querySelector("canvas").width;
 const ctx=document.querySelector("canvas").getContext("2d");
 class Obj{
-    constructor(posX,posY,sizeX,sizeY,velocityX,velocityY,objColor){
-        this.color=objColor;
+    constructor(posX,posY,sizeX,sizeY,texture,velocityX=0,velocityY=0){
+        this.tex=texture;
         this.x=posX;
         this.y=posY;
         this.w=sizeX;
@@ -31,8 +32,12 @@ class Obj{
         this.x+=this.vX;
         this.y+=this.vY;
         if(physics){this.vY+=0.3;}
-        ctx.fillStyle=this.color;
-        ctx.fillRect(this.x,this.y,this.w,this.h);
+        if((this.tex.charAt(0)=='r')&&(this.tex.charAt(1)=='g')&&(this.tex.charAt(2)=='b')){
+            ctx.fillStyle=this.tex;
+            ctx.fillRect(this.x,this.y,this.w,this.h);
+        }else{
+            ctx.drawImage(this.tex,this.x,this.y,this.w,this.h);
+        }
     }
     static coll(obj1,obj2){
         if ((obj1.y+obj1.h>obj2.y)&&(obj2.x+obj2.w>obj1.x)&&(obj1.x+obj1.w>obj2.x)&&(obj2.y+obj2.h>obj1.y)){
@@ -40,8 +45,8 @@ class Obj{
         }else{return false;}
     }
 }
-const player=new Obj(cw/2,35,30,30,0,0,"black");
-const coin=new Obj((cw*Math.random())-15,(ch*Math.random())-15,30,30,0,0,"rgb(0,255,0)");
+const player=new Obj(cw/2,35,30,30,"rgb(0,0,0)");
+const coin=new Obj((cw*Math.random())-15,(ch*Math.random())-15,30,30,"rgb(0,255,0)");
 document.getElementById("colo").addEventListener("input",(event)=>{
     player.color=event.target.value;
 })
@@ -117,16 +122,16 @@ function spawn(){
     let direc=Math.floor(4*Math.random());
     switch(direc){
         case 0:
-            enemy=new Obj(cw*Math.random(),-40,40,40,0,5,"red");
+            enemy=new Obj(cw*Math.random(),-40,40,40,"rgb(255,0,0)",0,5);
             break;
         case 1:
-            enemy=new Obj(cw,ch*Math.random(),40,40,-5,0,"red");
+            enemy=new Obj(cw,ch*Math.random(),40,40,"rgb(255,0,0)",-5,0);
             break;
         case 2:
-            enemy=new Obj(cw*Math.random(),ch,40,40,0,-5,"red");
+            enemy=new Obj(cw*Math.random(),ch,40,40,"rgb(255,0,0)",0,-5);
             break;
         case 3:
-            enemy=new Obj(-40,ch*Math.random(),40,40,5,0,"red");
+            enemy=new Obj(-40,ch*Math.random(),40,40,"rgb(255,0,0)",5,0);
             break;
     }
     enemys.push(enemy);
