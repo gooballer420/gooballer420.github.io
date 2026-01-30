@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>geometry dash remake</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <h1>geometry dash</h1>
+    <canvas width="1000" height="600"></canvas>
+</body>
+<script>
+const canv=document.querySelector("canvas");
+const ctx=canv.getContext("2d");
+document.fullscreenElement=canv;
+ctx.fillText("1082",100,100);
+canv.addEventListener("click",(event)=>{
+    while(!document.fullscreenElement){
+    canv.requestFullscreen();
+    }
+    console.log(document.fullscreenElement);
+});
+</script>
+</html>
