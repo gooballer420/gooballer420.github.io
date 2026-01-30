@@ -1,7 +1,4 @@
-let rate=500;
-let toggle=false;
-let score=0;
-let img=new Image();
+let rate=500;let toggle=false;let score=0;let high_score=0;let img=new Image();
 const ch=document.querySelector("canvas").height;
 const cw=document.querySelector("canvas").width;
 const ctx=document.querySelector("canvas").getContext("2d");
@@ -107,6 +104,10 @@ function drawFrame(){
     coin.draw(false);
     if(Obj.coll(coin,player)){
         score+=1;
+        if(score>high_score){
+            high_score=score;
+            document.getElementById("high_score").innerHTML="session high-score:"+high_score;
+        }
         document.getElementById("score").innerHTML="score:"+score;
         coin.x=(cw*Math.random())-15;
         coin.y=(ch*Math.random())-15;
